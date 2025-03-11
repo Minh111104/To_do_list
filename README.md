@@ -13,3 +13,10 @@ This is a simple Todo List web application that allows users to add, mark as com
 - CSS
 - JavaScript
   
+## Installation & Usage
+1. Clone the repository:
+    ```
+    git clone https://github.com/yourusername/todo-list.git
+    ```
+2. Open `index.html` in a web browser.
+3. Start adding tasks!
