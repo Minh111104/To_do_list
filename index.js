@@ -1,44 +1,55 @@
-let todos = [];
+// Reference to the input field and the todo list container
+const todoInput = document.getElementById('todoInput');
+const todoList = document.getElementById('todoList');
 
-class Todo {
-  #isComplete = false;
-  constructor(text) {
-    this.text = text;
-  }
-
-  toggleComplete() {
-    this.#isComplete = !this.#isComplete;
-  }
-
-  get isComplete() {
-    return this.#isComplete;
-  }
-}
-
+// Function to handle adding a new todo
 function addTodo() {
-  const text = todoInput.value.trim();
-  if (text) {
-    todos.push(new Todo(text));
-    todoInput.value = '';
-    renderTodos()
+  const text = todoInput.value.trim(); // Get the input value and trim whitespace
+  if (text === '') {
+    alert('Please enter a task!');
+    return;
   }
+
+  // Add the new todo to the list
+  displayTodo(text, false, todoList.children.length);
+
+  // Clear the input field
+  todoInput.value = '';
 }
 
-function renderTodos() {
-  todoList.innerHTML = "";
-  console.log(todos)
-  for (let i = 0; i < todos.length; i++) {
-    let todo = todos[i];
-    displayTodo(todo.text, todo.isComplete, i);
-  }
+// Function to display a todo item
+function displayTodo(text, isComplete, index) {
+  const todoItem = document.createElement('li');
+  todoItem.className = `todo-item ${isComplete ? 'completed' : ''}`;
+
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.checked = isComplete;
+  checkbox.onclick = () => checkboxClicked(index);
+
+  const todoText = document.createElement('span');
+  todoText.className = 'todo-text';
+  todoText.textContent = text;
+
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete';
+  deleteButton.onclick = () => deleteClicked(index);
+
+  todoItem.appendChild(checkbox);
+  todoItem.appendChild(todoText);
+  todoItem.appendChild(deleteButton);
+
+  todoList.appendChild(todoItem);
 }
 
+// Function to handle checkbox click
 function checkboxClicked(index) {
-  todos[index].toggleComplete();
-  renderTodos();
+  const todoItem = todoList.children[index];
+  todoItem.classList.toggle('completed');
 }
 
+// Function to handle delete button click
 function deleteClicked(index) {
-  todos.splice(index, 1);
-  renderTodos();
+  const todoItem = todoList.children[index];
+  todoList.removeChild(todoItem);
 }
