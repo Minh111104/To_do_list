@@ -58,5 +58,8 @@ Todo_List/
 Contributions are welcome! Feel free to fork the repository and submit a pull request.
 
 ## License
+<<<<<<< HEAD
 
+=======
+>>>>>>> c73fbb3de8051012fa4f9394bc591a01dcebdb10
 This project is created for educational purpose.
